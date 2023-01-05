@@ -1,8 +1,7 @@
 # Issue
 
 There appears to be some sort of incompatiblity between pyodbc, unixodbc, connection pooling,
-and the simba spark driver: https://www.databricks.com/spark/odbc-drivers-download, with long 
-connection strings.
+and long connection strings.
 
 I'm really unsure where to start. You can reproduce this by running:
 
