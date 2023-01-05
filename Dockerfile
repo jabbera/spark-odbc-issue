@@ -1,15 +1,13 @@
 FROM ubuntu:jammy
 
-COPY sparkodbc.zip /tmp/
-
 # Install base utilities
 RUN apt-get update && \
     apt-get install -y build-essential wget unixodbc unzip libsasl2-modules-gssapi-mit valgrind
 
-RUN unzip /tmp/sparkodbc.zip -d /tmp && \
-    dpkg -i /tmp/simba*.deb && \
-    echo "[ODBC]" >> /etc/odbcinst.ini && \
+RUN echo "[ODBC]" >> /etc/odbcinst.ini && \
     echo "Pooling = Yes" >> /etc/odbcinst.ini && \
+    echo "Trace = Yes" >> /etc/odbcinst.ini && \
+    echo "TraceFile = /tmp/odbctrace.log" >> /etc/odbcinst.ini && \
     echo "[Simba Spark ODBC Driver]" >> /etc/odbcinst.ini && \
     echo "Driver=/opt/simba/spark/lib/64/libsparkodbc_sb64.so" >> /etc/odbcinst.ini
 
